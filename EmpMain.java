@@ -264,6 +264,8 @@ System.out.println("26.find highest paid salary baesd on the gender");
   System.out.println("-------------------");
   
   
-  System.out.println("34.");
+  System.out.println("34.no of employees greater than 2");
+		ls.stream().collect(Collectors.groupingBy(Employee::getDept,Collectors.counting()))
+             .entrySet().stream().filter(f->f.getValue()>2).forEach(System.out::println);
 	}
 	}
