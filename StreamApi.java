@@ -71,6 +71,19 @@ public class StreamApi {
 	 Map<String,Long> mpa= Arrays.stream(sJ.split("")).collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new,Collectors.counting()));
 	 String firstNonRepeatChar=mpa.entrySet().stream().filter(e->e.getValue()==1).map(e->e.getKey()).findFirst().get();
 	 System.out.println("First Non-repeat char- " + firstNonRepeatChar );
+
+		
+	 //Another method
+	  String i12="Hello world";
+	  Map<Character,Long> charCount=i12.chars().mapToObj(i->(char)i)
+			   .collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new,Collectors.counting()));
+	  Optional<Character> op1=charCount.entrySet().stream().filter((e)->e.getValue()==1).map(e->e.getKey()).findFirst(); 
+	  Optional<Character> op2=charCount.entrySet().stream().filter((e)->e.getValue()>1).map(e->e.getKey()).findFirst();
+	  
+	  if(op1.isPresent()) {
+		  System.out.println("First Non Repeat : " + op1.get());  //H
+	  }
+	  System.out.println("First Repeat : " + op2.orElse(null)); //l
 	 
 	 //10.sum o all evevn numbers   o/p - 14
 	   List<Integer> ev=Arrays.asList(1,2,4,7,8,5);
