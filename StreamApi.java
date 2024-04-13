@@ -151,6 +151,31 @@ public class StreamApi {
 	   Map<String,Long> wordCnt=       Arrays.stream(ws.split(" ")).filter(e->Collections.frequency(Arrays.asList(ws.split(" ")), e)>=1)
 	            .collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new,Collectors.counting()));
 	   System.out.println(wordCnt);
+//23.max no.of vowels   [orangaee]
+		List<String> list1 = Arrays.asList("apple", "banana", "orangaee");
+	Map<String,Long> freqMap=list1.stream().collect
+			(Collectors.toMap(s->s, s->s.chars().filter(e->"AEIOUaeiou".indexOf(e)!=-1).count()));
+	Long maxValue=	freqMap.values().stream().mapToLong(Long::longValue).max().orElse(0);
+	List<String> li=    freqMap.entrySet().stream()
+	         .filter(e->e.getValue()==maxValue)
+	         .map(Map.Entry::getKey)
+	         .collect(Collectors.toList());
+	System.out.println(li);
+	//24.max repeat no [4]
+	 List<Integer> numbers = Arrays.asList(1, 2, 3, 3, 4, 4, 4, 5, 5);
+	 Map<Integer,Long> ml=  numbers.stream()
+	      .collect(Collectors.groupingBy(e->e,Collectors.counting()));
+	 Long minValue=     ml.values().stream().mapToLong(Long::longValue).min().orElse(0);
+	 List<Integer> nu=   ml.entrySet().stream()
+	         .filter(e->e.getValue()==minValue).map(Map.Entry::getKey).collect(Collectors.toList());
+	 System.out.println(nu);
+
+		//25.only digits print[123, 456, 789]
+	 List<String> strings = Arrays.asList("123", "abc", "456", "789", "def");
+	    Predicate<String> pr=s->s.matches("\\d+");
+	    List<String> st=  strings.stream()
+	    .filter(pr).collect(Collectors.toList());
+	    System.out.println(st);
 	}
 
 }
